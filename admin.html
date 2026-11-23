@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>รายการคำสั่งซื้อ — Body Scent</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .table-wrap { overflow-x: auto; }
+  table.orders-table { width: 100%; border-collapse: collapse; min-width: 48rem; }
+  table.orders-table th,
+  table.orders-table td {
+    padding: var(--space-2) var(--space-2);
+    border-bottom: 1px solid var(--line-soft);
+    text-align: left;
+    font-size: var(--text-sm);
+    vertical-align: top;
+  }
+  table.orders-table thead th {
+    font-family: var(--font-body);
+    font-weight: 500;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  table.orders-table tbody tr:hover { background: var(--white); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="index.html">Body Scent</a>
+    <nav class="site-nav">
+      <a href="index.html">หน้าแรก</a>
+      <a href="product.html">สินค้าทั้งหมด</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section section--white">
+  <div class="container">
+    <div class="section-head">
+      <h1>รายการคำสั่งซื้อ</h1>
+      <p>ข้อมูลคำสั่งซื้อล่าสุดจากลูกค้า เรียงจากรายการใหม่ไปเก่า</p>
+    </div>
+
+    <div class="table-wrap">
+      <table id="ordersTable" class="orders-table">
+        <thead>
+          <tr>
+            <th>วันเวลา</th>
+            <th>ชื่อลูกค้า</th>
+            <th>เบอร์โทร/Line</th>
+            <th>รายการสินค้า</th>
+            <th>จำนวนเงินรวม</th>
+            <th>หมายเหตุ</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <p>&copy; 2026 Body Scent</p>
+    <p>น้ำหอมและโรลออนสำหรับทุกอารมณ์ของคุณ</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

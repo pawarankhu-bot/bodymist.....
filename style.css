@@ -1,0 +1,757 @@
+/* ==========================================================================
+   Body Scent — shared theme (premium, minimal)
+   Use on every page. Class names are documented in the section comments.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500&family=Noto+Serif+Thai:wght@300;400;500&display=swap");
+
+/* --------------------------------------------------------------------------
+   1. Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  /* Base palette */
+  --white: #fdfcfa;
+  --cream: #f6f1e8;
+  --sand: #e9dfcf;
+  --beige-deep: #b9a687;
+  --ink: #2f2a24;
+  --ink-soft: #62594d;
+
+  /* Accent: soft gold / bronze */
+  --accent: #a9824b;
+  --accent-deep: #85643a; /* for text on light backgrounds */
+  --accent-soft: #d8c19a;
+
+  /* Lines */
+  --line: rgba(47, 42, 36, 0.28);
+  --line-soft: rgba(47, 42, 36, 0.12);
+
+  /* Mood colors: tiny accents only (dots, short rules, icons) */
+  --mood-fresh: #2f5d46;
+  --mood-sweet: #7a4e8c;
+  --mood-confident: #3e4f63;
+  --mood-romance: #c26a66;
+
+  /* Type */
+  --font-display: "Cormorant Garamond", "Noto Serif Thai", Georgia, serif;
+  --font-serif-th: "Noto Serif Thai", "Cormorant Garamond", Georgia, serif;
+  --font-body: "IBM Plex Sans Thai", "Helvetica Neue", Arial, sans-serif;
+
+  /* Type scale */
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.1875rem;
+  --text-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --text-2xl: clamp(2rem, 1.5rem + 2.2vw, 3.25rem);
+  --text-hero: clamp(2.75rem, 1.8rem + 4.5vw, 5.5rem);
+
+  /* Spacing (generous) */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+  --space-6: clamp(4.5rem, 3rem + 7vw, 9rem);
+
+  --container: 72rem;
+  --radius: 2px;
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & base
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 300;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--accent-soft);
+  text-underline-offset: 0.25em;
+  transition: color 0.3s var(--ease), text-decoration-color 0.3s var(--ease);
+}
+
+a:hover {
+  color: var(--accent-deep);
+  text-decoration-color: var(--accent);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+
+h1 {
+  font-size: var(--text-hero);
+  line-height: 1.15;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: var(--text-2xl);
+}
+
+h3 {
+  font-size: var(--text-xl);
+}
+
+p {
+  margin: 0 0 var(--space-3);
+  max-width: 38rem;
+  color: var(--ink-soft);
+}
+
+:focus-visible {
+  outline: 1px solid var(--accent-deep);
+  outline-offset: 4px;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   3. Layout
+   .container  centered content width
+   .section    vertical rhythm between page sections
+   .section--white / --sand   alternate backgrounds
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--space-3);
+}
+
+.section {
+  padding-block: var(--space-6);
+}
+
+.section--white {
+  background: var(--white);
+}
+
+.section--sand {
+  background: var(--sand);
+}
+
+.section-head {
+  margin-bottom: var(--space-5);
+}
+
+.section-head--center {
+  text-align: center;
+}
+
+.section-head--center p {
+  margin-inline: auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   4. Header / navigation
+   <header class="site-header"><div class="container site-header__inner">
+     <a class="brand">Body Scent</a><nav class="site-nav"><a>…</a></nav>
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(246, 241, 232, 0.94);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 4.5rem;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.625rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.site-nav a {
+  font-size: var(--text-sm);
+  text-decoration: none;
+  color: var(--ink-soft);
+  padding-block: 0.25rem;
+  border-bottom: 1px solid transparent;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   5. Hero
+   -------------------------------------------------------------------------- */
+.hero {
+  padding-block: var(--space-6);
+  background: var(--white);
+}
+
+.hero__inner {
+  display: grid;
+  gap: var(--space-5);
+  align-items: center;
+}
+
+.hero p {
+  font-size: var(--text-lg);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+/* --------------------------------------------------------------------------
+   6. Buttons — thin, soft-dark outline
+   .btn           outline (default)
+   .btn--solid    filled deep tone
+   .btn--block    full width
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0.75rem 2.25rem;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease),
+    border-color 0.3s var(--ease);
+}
+
+.btn:hover {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+
+.btn--solid {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.btn--solid:hover {
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
+  color: var(--white);
+}
+
+.btn--block {
+  display: flex;
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* --------------------------------------------------------------------------
+   7. Mood marks — color appears only as a small dot / short rule.
+   Put data-mood="fresh|sweet|confident|romance" on any element, then:
+   .mood-dot    small filled dot
+   .mood-rule   short colored line (use under headings)
+   .mood-label  dot + mood name, inline
+   -------------------------------------------------------------------------- */
+[data-mood="fresh"] {
+  --mood: var(--mood-fresh);
+}
+[data-mood="sweet"] {
+  --mood: var(--mood-sweet);
+}
+[data-mood="confident"] {
+  --mood: var(--mood-confident);
+}
+[data-mood="romance"] {
+  --mood: var(--mood-romance);
+}
+
+.mood-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--mood, var(--accent));
+  flex: none;
+}
+
+.mood-rule {
+  display: block;
+  width: 2.5rem;
+  height: 2px;
+  margin-block: var(--space-2);
+  background: var(--mood, var(--accent));
+  border: 0;
+}
+
+.mood-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+}
+
+/* --------------------------------------------------------------------------
+   8. Mood filter (tabs)
+   <div class="filter"><button class="filter__btn is-active" data-filter="all">
+   -------------------------------------------------------------------------- */
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  margin-bottom: var(--space-5);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.filter__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.75rem 0.25rem;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  margin-bottom: -1px;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 300;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.filter__btn:hover {
+  color: var(--ink);
+}
+
+.filter__btn.is-active {
+  color: var(--ink);
+  font-weight: 400;
+  border-bottom-color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   9. Product grid & card
+   <article class="product-card" data-mood="fresh">
+     <div class="product-card__media"><img></div>
+     <div class="product-card__body">
+       <span class="mood-label"><i class="mood-dot"></i>Fresh</span>
+       <h3 class="product-card__title">…</h3>
+       <p class="product-card__desc">…</p>
+       <div class="product-card__foot"><span class="price">89 บาท</span><button class="btn">…
+   -------------------------------------------------------------------------- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: var(--space-5) var(--space-4);
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  transition: border-color 0.3s var(--ease);
+}
+
+.product-card:hover {
+  border-color: var(--line);
+}
+
+.product-card__media {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--sand);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.product-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+}
+
+.product-card__title {
+  margin: var(--space-1) 0 0;
+  font-family: var(--font-serif-th);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.product-card__meta {
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+}
+
+.product-card__desc {
+  flex: 1;
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.8;
+}
+
+.product-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--line-soft);
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--accent-deep);
+}
+
+.price small {
+  margin-left: 0.25rem;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 300;
+  color: var(--ink-soft);
+}
+
+/* --------------------------------------------------------------------------
+   10. Mood picker cards (quiz / choose-your-scent)
+   .mood-card is a quiet outlined tile; color only via the small .mood-dot.
+   -------------------------------------------------------------------------- */
+.mood-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: var(--space-3);
+}
+
+.mood-card {
+  padding: var(--space-4) var(--space-3);
+  background: var(--white);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease);
+}
+
+.mood-card:hover,
+.mood-card.is-selected {
+  border-color: var(--ink);
+}
+
+.mood-card h3 {
+  margin: var(--space-2) 0 var(--space-1);
+}
+
+.mood-card p {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+/* --------------------------------------------------------------------------
+   11. Forms (order page)
+   <div class="field"><label>…</label><input class="input"></div>
+   -------------------------------------------------------------------------- */
+.form {
+  max-width: 34rem;
+}
+
+.field {
+  margin-bottom: var(--space-3);
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background: var(--white);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 300;
+  transition: border-color 0.3s var(--ease);
+}
+
+.textarea {
+  min-height: 7.5rem;
+  resize: vertical;
+}
+
+.input:hover,
+.textarea:hover,
+.select:hover {
+  border-color: var(--ink-soft);
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--accent-deep);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--beige-deep);
+}
+
+.field-hint {
+  margin-top: 0.375rem;
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+}
+
+.field-error {
+  margin-top: 0.375rem;
+  font-size: var(--text-sm);
+  color: var(--mood-romance);
+}
+
+/* --------------------------------------------------------------------------
+   12. Cart / order summary
+   -------------------------------------------------------------------------- */
+.summary {
+  padding: var(--space-4);
+  background: var(--white);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+}
+
+.summary__row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding-block: var(--space-2);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.summary__row:last-child {
+  border-bottom: 0;
+}
+
+.summary__total {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--accent-deep);
+}
+
+/* --------------------------------------------------------------------------
+   13. Messages (success / error after submitting an order)
+   -------------------------------------------------------------------------- */
+.notice {
+  padding: var(--space-3);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--accent);
+  border-radius: var(--radius);
+  font-size: var(--text-sm);
+}
+
+.notice--error {
+  border-left-color: var(--mood-romance);
+}
+
+/* --------------------------------------------------------------------------
+   14. Divider & footer
+   -------------------------------------------------------------------------- */
+.divider {
+  height: 1px;
+  margin-block: var(--space-5);
+  background: var(--line-soft);
+  border: 0;
+}
+
+.site-footer {
+  padding-block: var(--space-5);
+  background: var(--sand);
+  border-top: 1px solid var(--line-soft);
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   15. Responsive
+   -------------------------------------------------------------------------- */
+@media (min-width: 48em) {
+  .container {
+    padding-inline: var(--space-4);
+  }
+
+  .hero__inner {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--space-6);
+  }
+}
+
+@media (max-width: 47.99em) {
+  .site-header__inner {
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-1);
+    padding-block: var(--space-2);
+  }
+
+  .site-nav {
+    justify-content: center;
+    gap: var(--space-3);
+  }
+
+  .section-head {
+    margin-bottom: var(--space-4);
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4) var(--space-2);
+  }
+
+  .product-card__body {
+    padding: var(--space-2);
+  }
+
+  .product-card__title {
+    font-size: 1.0625rem;
+  }
+
+  .product-card__foot {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .product-card__foot .btn {
+    padding-inline: 1rem;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+  }
+
+  .summary {
+    padding: var(--space-3);
+  }
+}
+
+@media (max-width: 29.99em) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   16. Reduced motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
